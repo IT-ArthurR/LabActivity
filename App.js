@@ -44,7 +44,32 @@ class App extends Component {
         }
     };
 
-    
+    removeFromCart = (id) => {
+        this.setState({ cart: this.state.cart.filter((item) => item.id !== id) });
+    };
+
+    clearCart = () => {
+        this.setState({ cart: [] });
+    };
+
+    handleSearch = (event) => {
+        this.setState({ search: event.target.value });
+    };
+
+    render() {
+        return (
+            <div className="container">
+                <ProductList
+                    products={this.state.products}
+                    addToCart={this.addToCart}
+                    search={this.state.search}
+                    handleSearch={this.handleSearch}
+                />
+                <ShoppingCart cart={this.state.cart} removeFromCart={this.removeFromCart} clearCart={this.clearCart} />
+            </div>
+        );
+    }
+
 }
 
 export default App;
